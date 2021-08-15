@@ -1,0 +1,80 @@
+
+//linked list sample
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+
+class Program
+{
+    static void Main()
+    {
+        // 自分の得意な言語で
+        // Let's チャレンジ！！
+        var line2 = int.Parse(Console.ReadLine());
+        var list = new FixedLinkedList<int>(line2);
+        
+        for(int i = 0;i<line2;i++){
+            var line = Console.ReadLine();
+            var k = line.Split(' ');
+            var id = int.Parse(k[0]);
+            var root = k[1];
+            var like = int.Parse(k[2]);
+            if(root == "None"){
+                list.AddFirst(like);
+            }else{
+                list.AddFirst(like);
+            }
+        }
+        
+         int maxNum = 0;
+        
+        Console.WriteLine("XXXXXX");
+    }
+    
+    public class FixedLinkedList<T> : IEnumerable<T>
+    {
+    private LinkedList<T> _list;
+
+    public int Count => _list.Count;
+    public LinkedListNode<T> First => _list.First;
+    public LinkedListNode<T> Last => _list.Last;
+
+    public int Capacity { get; private set; }
+
+    public FixedLinkedList(int capacity)
+    {
+        Capacity = capacity;
+        _list = new LinkedList<T>();
+    }
+
+    public FixedLinkedList(IEnumerable<T> collection)
+    {
+        Capacity = collection.Count();
+        if (collection != null) _list = new LinkedList<T>(collection);
+        else _list = new LinkedList<T>();
+    }
+
+    public LinkedListNode<T> AddLast(T item) {
+        var value = _list.AddLast(item);
+        if(Count > Capacity) _list.RemoveFirst();
+        return value;
+    }
+    public LinkedListNode<T> AddFirst(T item)
+    {
+        var value = _list.AddFirst(item);
+        if (Count > Capacity) _list.RemoveLast();
+        return value;
+    }
+
+    public void RemoveFirst() => _list.RemoveFirst();
+
+    public void RemoveLast() => _list.RemoveLast();
+
+    public IEnumerator<T> GetEnumerator() => _list.GetEnumerator();
+
+    IEnumerator IEnumerable.GetEnumerator() => _list.GetEnumerator();
+    }
+
+}
