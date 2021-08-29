@@ -6,6 +6,11 @@ var k = line.Split(' ');
 var a = int.Parse(k[0]);
 var b = int.Parse(k[1]);
 
+・charからint への変換
+charが数字かチェック
+if(Char.IsDigit(array[i,j])){
+int now = (int)Char.GetNumericValue(array[i,j]);
+
 ・ジャグ配列でダメなら多次元配列使う　,
 char[,] array = new char[height,width];
         for(int i = 0;i<height;i++){
